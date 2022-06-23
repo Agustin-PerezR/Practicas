@@ -18,9 +18,7 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag app
-    - name: Run the image
-      run: docker run app
+      run: docker build -t juanferrin99/github:app .
     - name: Push image
       run: docker push juanferrin99/github:app
        
