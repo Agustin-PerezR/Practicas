@@ -1,10 +1,8 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ "p1" ]
   pull_request:
-    branches: [ "p1" ]
+    branches: [ "desarrollo","main" ]
 
 jobs:
 
@@ -24,5 +22,5 @@ jobs:
     - name: Run the image
       run: docker run app
     - name: Push image
-      run: docekr push juanferrin99/github:app
+      run: docker push juanferrin99/github:app
        
