@@ -20,12 +20,10 @@ jobs:
             username: ${{ secrets.DOCKER_HUB_USERNAME }}
             password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - name: Build the Docker image para dev
-        run: docker build -t  juanferrin99/github:dev . only:-desarrollo 
+        run: docker build -t  juanferrin99/github:dev . -only:-desarrollo 
       - name: Push image dev
-        run: docker push juanferrin99/github:dev only:-desarrollo
+        run: docker push juanferrin99/github:dev -only:-desarrollo
       - name: Build the Docker image para main
-        run: docker build -t juanferrin99/github:main . only:-main
+        run: docker build -t juanferrin99/github:main . -only:-main
       - name: Push image main
-        run: docker push juanferrin99/github:main only:-main
-       
-
+        run: docker push juanferrin99/github:main -only:-main
