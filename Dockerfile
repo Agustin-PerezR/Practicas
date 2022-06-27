@@ -6,3 +6,5 @@ WORKDIR /my_app
 RUN npm install
 EXPOSE 3000
 CMD node pagina.js
+
+
