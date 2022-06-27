@@ -20,6 +20,6 @@ jobs:
             username: ${{ secrets.DOCKER_HUB_USERNAME }}
             password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - name: Build the Docker image 
-        run: docker build -t  juanferrin99/github:${GIT_BRANCH_NAME}.
+        run: docker build -t  juanferrin99/github:"${GIT_BRANCH_NAME}" .
       - name: Push image dev
-        run: docker push juanferrin99/github:${GIT_BRANCH_NAME}
+        run: docker push juanferrin99/github:"${GIT_BRANCH_NAME}"
