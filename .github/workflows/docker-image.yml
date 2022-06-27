@@ -19,15 +19,7 @@ jobs:
         with:
             username: ${{ secrets.DOCKER_HUB_USERNAME }}
             password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: Build the Docker image para dev
-        if: ${{ github.ref == 'refs/heads/desarrollo' }} 
-        run: docker build -t  juanferrin99/github:dev .
+      - name: Build the Docker image 
+        run: docker build -t  juanferrin99/github:${GITHUB_REF##*/} .
       - name: Push image dev
-        if: ${{ github.ref == 'refs/heads/desarrollo' }} 
-        run: docker push juanferrin99/github:dev
-      - name: Build the Docker image para main
-        if: ${{ github.ref == 'refs/heads/main' }} 
-        run: docker build -t juanferrin99/github:main . 
-      - name: Push image main
-        if: ${{ github.ref == 'refs/heads/main' }} 
-        run: docker push juanferrin99/github:main 
+        run: docker push juanferrin99/github:${GITHUB_REF##*/}
