@@ -2,29 +2,30 @@ name: Docker Image CI
 
 on:
   pull_request:
-    branches: [ "desarrollo","main" ]
+    branches: 
+     - main
+     - desarrollo
 
 jobs:
 
   build:
 
     runs-on: ubuntu-latest
-
+      
     steps:
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-    - name: Build the Docker image para dev
-      if: ${{ github.ref == 'refs/heads/desarrollo' }}
-      run: docker build -t juanferrin99/github:dev .
-    - name: Push image dev
-      run: docker push juanferrin99/github:dev
-    - name: Build the Docker image para main
-      if: ${{ github.ref == 'refs/heads/main' }}
-      run: docker build -t juanferrin99/github:main .
-    - name: Push image main
-      run: docker push juanferrin99/github:main
+      - uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+            username: ${{ secrets.DOCKER_HUB_USERNAME }}
+            password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Build the Docker image para dev
+        run: docker build -t juanferrin99/github:dev .
+      - name: Push image dev
+        run: docker push juanferrin99/github:dev
+      - name: Build the Docker image para main
+        run: docker build -t juanferrin99/github:main .
+      - name: Push image main
+        run: docker push juanferrin99/github:main
        
 
