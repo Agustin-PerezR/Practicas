@@ -1,22 +1,26 @@
-name: Docker Image CI
-
+name: ghcr_test
 on:
   push:
     branches:
-      - server
+      - dev
 
 jobs:
-  dockerloginbuildpush:
+  deploy:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
-      - name: login to GitHub Container Registry
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Login to GitHub Packages
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v2
-      - name: create image from repository
-        run: docker build -t ghcr.io/${{ github.actor }}/dokeo .
-      - name: push image to GitHub Container Registry
-        run: docker push ghcr.io/${{ github.actor }}/dokeo:latest
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
