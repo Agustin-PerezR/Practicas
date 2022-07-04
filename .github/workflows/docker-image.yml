@@ -27,11 +27,6 @@ jobs:
           registry: ghcr.io
           username: $GITHUB_USER
       - 
-        env: 
-          IMAGE_NAME: "${{ github.repository }}"
-          OWNER: my-organization-name
-          REGISTRY: ghcr.io
-      - 
         name: "Build the Docker image"
         run: "docker build -t ghcr.io/juanferrin99/\"${GITHUB_BASE_REF}\" --pull ."
       - 
