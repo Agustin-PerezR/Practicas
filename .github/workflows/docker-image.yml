@@ -1,35 +1,22 @@
 name: Docker Image CI
 
 on:
-  pull_request:
-    branches: 
-     - main
-     - desarrollo
-jobs: 
-  build-push: 
-    name: "Buid and push Docker image to GitHub Container registry"
-    permissions: 
-      contents: read
-      packages: write
-    runs-on: ubuntu-latest
-    steps: 
-      - 
-        name: "Checkout the repository"
-        uses: actions/checkout@v2
-      - 
-        env: 
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          GITHUB_USER: "${{ github.actor }}"
-        name: "Login to GitHub Container registry"
-        uses: docker/login-action@v1
-        with: 
-          password: "${{ secrets.GITHUB_TOKEN }}"
-          registry: ghcr.io
-          username: $GITHUB_USER
-      - 
-        name: "Build the Docker image"
-        run: "docker build -t ghcr.io/juanferrin99/\"${GITHUB_BASE_REF}\" --pull ."
-      - 
-        name: "Push image dev"
-        run: "docker push ghcr.io/juanferrin99/\"${GITHUB_BASE_REF}\":latest"
+  push:
+    branches:
+      - server
 
+jobs:
+  dockerloginbuildpush:
+    runs-on: ubuntu-latest
+    steps:
+      - name: login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - name: create image from repository
+        run: docker build -t ghcr.io/${{ github.actor }}/<img-name> .
+      - name: push image to GitHub Container Registry
+        run: docker push ghcr.io/${{ github.actor }}/<img-name>:latest
