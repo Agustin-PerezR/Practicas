@@ -39,6 +39,6 @@ jobs:
         target: final
         push: true
         tags: |
-          $REGISTRY/$OWNER/$IMAGE_NAME:$(date +%s)
+          latest
         build-args: |
           ENVIRONMENT=production
