@@ -1,14 +1,15 @@
-name: Docker CI
+name: Docker Image CI
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: 
+     - main
+     - desarrollo
 
 jobs:
-  build-push:
-    name: Buid and push Docker image to GitHub Container registry
+
+  build:
+
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -27,18 +28,8 @@ jobs:
         username: $GITHUB_USER
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build and Push Docker Image
-      env:
-        REGISTRY: ghcr.io
-        OWNER: yo
-        IMAGE_NAME: ${{ github.repository }}
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        file: ./Dockerfile
-        target: final
-        push: true
-        tags: |
-          $REGISTRY/$OWNER/$IMAGE_NAME:$(date +%s)
-        build-args: |
-          ENVIRONMENT=production
+      - name: Build the Docker image 
+        run: docker build -t ghcr.io/juanferrin99/"${GITHUB_BASE_REF}" --pull .
+      - name: Push image dev
+        run: docker push ghcr.io/juanferrin99/"${GITHUB_BASE_REF}":latest
+
