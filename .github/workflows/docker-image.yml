@@ -45,7 +45,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           tags: ${{ steps.docker_meta.outputs.tags }}
-          file: Practicas/Dockerfile
+          file: ./Dockerfile
           
       - name: Push image
         uses: docker/build-push-action@v2
