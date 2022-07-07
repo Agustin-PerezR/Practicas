@@ -1,32 +1,64 @@
-name: Docker Image CI
+
+
+name: Publish Docker Image
 
 on:
-  pull_request:
-    branches: 
-     - main
-     - desarrollo
+  push:
+    branches: [ main, desarrollo ]
+  release:
+    types:
+      - published
+        
 jobs:
 
   build:
-
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
-      
+    
     steps:
-      - name: Get  date
-        id: DATE
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-      - uses: actions/checkout@v2
-      - name: Login to GitHub Container registry
+      - name: Check out
+        uses: actions/checkout@v2
+        
+      - name: Docker meta
+        id: docker_meta
+        uses: crazy-max/ghaction-docker-meta@v1
+        with:
+          images: ghcr.io/gbaeke/rgapi
+          tag-sha: true
+          tag-edge: false
+          tag-latest: true
+          
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        
+      - name: Login to GHCR
         uses: docker/login-action@v1
-        env:
-          GITHUB_USER: ${{ github.actor }}
-          GITHUB_TOKEN: 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
         with:
           registry: ghcr.io
-          username: $GITHUB_USER
-          password: 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
-      - name: Build the Docker image 
-        run: docker build -t ghcr.io/juanferrin99/"${GITHUB_BASE_REF}" --pull .
-      - name: Push image dev
-        run: docker push ghcr.io/juanferrin99/"${GITHUB_BASE_REF}":latest
-
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_PASSWORD }}
+          
+      - name: Build image
+        uses: docker/build-push-action@v2
+        with:
+          tags: ${{ steps.docker_meta.outputs.tags }} 
+          file: ./Dockerfile
+          
+      - name: Monitor image for vulnerabilities with Snyk
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK }}
+        with:
+          command: monitor
+          image: "ghcr.io/gbaeke/rgapi:main"
+          args: --file=Dockerfile --project-name=rgapi 
+          
+      - name: Push image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          file: ./Dockerfile
