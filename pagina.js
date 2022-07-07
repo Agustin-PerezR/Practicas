@@ -1,4 +1,4 @@
-var os = requiere('os')
+var os = require('os')
 
 const express = require('express')
 const app = express()
