@@ -5,17 +5,17 @@ name: Publish Docker Image
 on:
   push:
     branches: [ main, desarrollo ]
-  release:
-    types:
-      - published
         
 jobs:
 
   build:
-    if: "!contains(github.event.head_commit.message, 'skip ci')"
     runs-on: ubuntu-latest
     
     steps:
+      - name: Get  date
+        id: DATE
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        
       - name: Check out
         uses: actions/checkout@v2
         
@@ -47,18 +47,9 @@ jobs:
           tags: ${{ steps.docker_meta.outputs.tags }} 
           file: ./Dockerfile
           
-      - name: Monitor image for vulnerabilities with Snyk
-        uses: snyk/actions/docker@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK }}
-        with:
-          command: monitor
-          image: "ghcr.io/gbaeke/rgapi:main"
-          args: --file=Dockerfile --project-name=rgapi 
-          
       - name: Push image
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
+          tags: "${GITHUB_BASE_REF}"
           file: ./Dockerfile
