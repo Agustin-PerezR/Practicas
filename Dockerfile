@@ -2,7 +2,7 @@ FROM node:carbon-alpine
 ARG FECHA
 ENV FECHA=$DATE
 ARG HASH
-ENV HASH=$DATE
+ENV HASH=$GITHUB_RUN_ID
 RUN mkdir /my_app
 COPY pagina.js /my_app
 COPY package.json /my_app
