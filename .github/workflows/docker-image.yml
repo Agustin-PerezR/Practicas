@@ -13,8 +13,7 @@ jobs:
     
     steps:
       - name: Get  date
-        id: DATE
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: echo "{DATE}={::set-output name=date::$(date +'%Y-%m-%d')}" >> $GITHUB_ENV 
           
       - name: Check out
         uses: actions/checkout@v2
@@ -46,6 +45,8 @@ jobs:
         with:
           tags: ${{ steps.docker_meta.outputs.tags }}
           file: ./Dockerfile
+          env:
+            DATE
           
       - name: Push image
         uses: docker/build-push-action@v2
