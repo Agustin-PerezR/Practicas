@@ -4,8 +4,11 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+const id = process.env.GITHUB_RUN_ID
+const hora = process.env.DATE
+
 app.get('/', (req, res) => {
-  res.send('v' + "/** DATE **/" + " id:" + "no anda")
+  res.send('v' + hora + " id:" + id)
 })
 
 app.listen(port, () => {
