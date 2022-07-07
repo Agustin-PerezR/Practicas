@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 
 app.get('/', (req, res) => {
-  res.send('v' + "/** DATE **/" + " id:" + "${GITHUB_RUN_ID}")
+  res.send('v' + "/** DATE **/" + " id:" + " GITHUB_RUN_ID **/")
 })
 
 app.listen(port, () => {
