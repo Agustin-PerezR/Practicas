@@ -44,12 +44,12 @@ jobs:
       - name: Build image
         uses: docker/build-push-action@v2
         with:
-          tags: ${{GITHUB_BASE_REF}}
+          tags: "hoal"
           file: ./Dockerfile
           
       - name: Push image
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags:  ${{GITHUB_BASE_REF}}
+          tags: "hoal"
           file: ./Dockerfile
