@@ -13,7 +13,7 @@ jobs:
     
     steps:
       - name: Get  date
-        run: echo "{DATE}={::set-output name=date::$(date +'%Y-%m-%d')}" >> $GITHUB_ENV 
+        run:  echo "DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
           
       - name: Check out
         uses: actions/checkout@v2
