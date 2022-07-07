@@ -15,8 +15,7 @@ jobs:
       - name: Get  date
         id: DATE
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-        env:
-          hora: DATE
+          
       - name: Check out
         uses: actions/checkout@v2
         
