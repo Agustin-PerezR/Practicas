@@ -20,11 +20,11 @@ jobs:
         uses: docker/login-action@v1
         env:
           GITHUB_USER: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: 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
         with:
           registry: ghcr.io
           username: $GITHUB_USER
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: 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
       - name: Build the Docker image 
         run: docker build -t ghcr.io/juanferrin99/"${GITHUB_BASE_REF}" --pull .
       - name: Push image dev
