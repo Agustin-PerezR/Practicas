@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-const hora = process.env.DATE
+const hora = process.env.FECHA
 
 app.get('/', (req, res) => {
   res.send('v' + hora + "/** HASH_ID **/")
