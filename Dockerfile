@@ -8,8 +8,6 @@ COPY pagina.js /my_app
 COPY package.json /my_app
 RUN yarn install
 COPY . /usr/src/app
-RUN MY_DATE=$MY_DATE yarn build
-RUN IDHASH=$IDHASH yarn build
 WORKDIR /my_app
 RUN npm install
 EXPOSE 3000
