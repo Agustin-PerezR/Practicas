@@ -1,18 +1,28 @@
 {
-  "name": "expressCointaner",
+  "name": "github_acdc",
   "version": "1.0.0",
   "description": "",
   "main": "pagina.js",
-  "dependencies": {
-    "express": "^4.17.3",
-    "mysql2": "^2.3.3"
-  },
-  "devDependencies": {},
   "scripts": {
-    "test": "jest --ci --reporters=default --reporters=jest-junit --forceExit"
+    "test": "jest --ci --reporters=default --reporters=jest-junit --forceExit",
+    "start": "node app.js"
   },
-
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Agustin-PerezR/Practicas.git"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Agustin-PerezR/Practicas/issues"
+  },
+  "homepage": "https://github.com/Agustin-PerezR/Practicas#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "supertest": "^6.2.4"
+  },
+  "devDependencies": {
+    "jest": "^28.1.2",
+    "jest-junit": "^14.0.0"
+  }
 }
