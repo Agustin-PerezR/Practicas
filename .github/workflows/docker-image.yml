@@ -15,12 +15,8 @@ jobs:
       - name: Get  date
         run:  echo "DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
           
-      - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@v2
-        with:
-          find: "/**  HASH_ID **/"
-          replace: "${{ github.sha }}"
-          regex: false
+      - name: Get  id
+        run:  echo "IDHASH=$(git rev-parse --short HEAD)" >> ${GITHUB_ENV}
           
       - name: Check out
         uses: actions/checkout@v2
