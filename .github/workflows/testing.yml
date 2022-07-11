@@ -1,4 +1,4 @@
-name: Node.js CI
+name: test
 on:
   pull_request:
     branches:
@@ -14,4 +14,4 @@ jobs:
         with:
           node-version: '12.x'
       - run: npm install
-      - run: npm /home/runner/work/Practicas/testeo.test.js
+      - run: npm test /home/runner/work/Practicas/testeo.test.js
