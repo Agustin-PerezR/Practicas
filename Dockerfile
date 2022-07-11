@@ -11,4 +11,4 @@ COPY . /usr/src/app
 WORKDIR /my_app
 RUN npm install
 EXPOSE 3000
-CMD ["yarn", "node pagina.js" ]
+CMD node pagina.js
