@@ -4,10 +4,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-const hora = process.env.FECHA
-
 app.get('/', (req, res) => {
-  res.send('v' + hora + "/** HASH_ID **/")
+  res.send('v' + process.env.FECHA + process.env.ID_HASH)
 })
 
 app.listen(port, () => {
