@@ -1,4 +1,4 @@
-const app= require("./pagina.js");
+const app= require("./pagina");
 const request= require("supertest")(app);
 
 test("Test", async () => {
