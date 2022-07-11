@@ -48,8 +48,6 @@ jobs:
         with:
           tags: ${{ steps.docker_meta.outputs.tags }}
           file: ./Dockerfile
-          env:
-            DATE
           
       - name: Push image
         uses: docker/build-push-action@v2
