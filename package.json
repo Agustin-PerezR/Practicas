@@ -9,8 +9,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --ci --reporters=default --reporters=jest-junit --forceExit"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC"
