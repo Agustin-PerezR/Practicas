@@ -1,4 +1,5 @@
 FROM node:carbon-alpine
+COPY . .
 ARG FECHA
 ENV FECHA=$DATE
 ARG ID_HASH
