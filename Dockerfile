@@ -1,7 +1,7 @@
 FROM node:carbon-alpine
 COPY . .
 ARG FECHA
-ENV FECHA=$DATE
+ENV FECHA=${MY_DATE}
 ARG ID_HASH
 ENV ID_HASH=$IDHASH
 RUN mkdir /my_app
