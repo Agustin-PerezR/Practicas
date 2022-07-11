@@ -1,9 +1,10 @@
 FROM node:carbon-alpine
-COPY . .
-ARG FECHA
+ARG FECHA=${MY_DATE}
 ENV FECHA=${MY_DATE}
-ARG ID_HASH
-ENV ID_HASH=$IDHASH
+ARG ID_HASH={$IDHASH}
+ENV ID_HASH={$IDHASH}
+RUN FECHA=${MY_DATE} yarn build
+RUN ID_HASH=${ID_HASH} yarn build
 RUN mkdir /my_app
 COPY pagina.js /my_app
 COPY package.json /my_app
