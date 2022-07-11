@@ -20,7 +20,7 @@ jobs:
           
       - name: Get  id
         run:  echo "IDHASH=$(git rev-parse --short HEAD)" >> ${GITHUB_ENV}
-        
+      
       - name: Docker meta
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
@@ -42,7 +42,10 @@ jobs:
           registry: ghcr.io
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          
+
+      - name: eCHO  id
+        run:  echo $IDHASH
+
       - name: Build image
         uses: docker/build-push-action@v2
         with:
