@@ -12,7 +12,7 @@ jobs:
         run: echo "MY_DATE=2020-10-07T12:00:00+01:00" >> $GITHUB_ENV
           
       - name: Get  id
-        run:  echo "IDHASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run:  echo "IDHASH=$(git rev-parse --short HEAD)" >> ${GITHUB_ENV}
         
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -27,11 +27,8 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.PASSWORD }}
           
-      - name: echo tag1
-        run:  echo $GITHUB_HEAD_REF
-        
-      - name: echo tag2
-        run:  echo ${{ github.event.pull_request.base.ref }}   
+      - name: echo tags
+        run:  echo ${{ steps.docker_meta.outputs.tags }}
       
       - name: Build and push
         uses: docker/build-push-action@v3
