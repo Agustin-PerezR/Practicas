@@ -27,6 +27,9 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.PASSWORD }}
           
+      - name: echo tags
+        run:  echo ${{ steps.docker_meta.outputs.tags }}
+      
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
