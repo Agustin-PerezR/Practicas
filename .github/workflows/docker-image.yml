@@ -17,9 +17,6 @@ jobs:
       - name: echo tag1
         run:  echo  ${GITHUB_HEAD_REF}
         
-      - name: echo tag2
-        run:  echo ${{$GITHUB_HEAD_REF}} 
-        
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
         
