@@ -27,8 +27,11 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.PASSWORD }}
           
-      - name: echo tags
-        run:  echo ${GITHUB_HEAD_REF},${GITHUB_BASE_REF}
+      - name: echo tag1
+        run:  echo $GITHUB_HEAD_REF
+        
+      - name: echo tag2
+        run:  echo ${{ github.event.pull_request.base.ref }}   
       
       - name: Build and push
         uses: docker/build-push-action@v3
