@@ -14,9 +14,6 @@ jobs:
       - name: Get  id
         run:  echo "IDHASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
         
-      - name: echo tag1
-        run:  echo  ${GITHUB_HEAD_REF}
-        
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
         
@@ -29,16 +26,10 @@ jobs:
           registry: ghcr.io
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          
-      - name: echo tag1
-        run:  echo  $GITHUB_HEAD_REF
-        
-      - name: echo tag2
-        run:  echo ${{ github.event.pull_request.base.ref }}  
       
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
+          tags: main
           file: ./Dockerfile
