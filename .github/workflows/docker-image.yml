@@ -14,6 +14,11 @@ jobs:
       - name: Get  id
         run:  echo "IDHASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
         
+      - name: echo tag1
+        run:  echo  $GITHUB_HEAD_REF
+        
+      - name: echo tag2
+        run:  echo $github.event.pull_request.base.ref   
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
         
@@ -28,7 +33,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           
       - name: echo tag1
-        run:  echo ${GITHUB_HEAD_REF}
+        run:  echo  $GITHUB_HEAD_REF
         
       - name: echo tag2
         run:  echo ${ github.event.pull_request.base.ref }  
