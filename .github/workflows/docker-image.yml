@@ -44,7 +44,7 @@ jobs:
           password: ${{secrets.GITHUB_TOKEN}}
           
       - name: eCHO  id
-        run:  echo ${{secrets.GITHUB_TOKEN}}
+        run:  echo  ${{github.actor}}
 
       - name: build image
         run: docker build . --tag ghcr.io/juanferrin99/dock:main
