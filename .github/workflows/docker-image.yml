@@ -25,8 +25,8 @@ jobs:
       - name: build image
         run: docker build . --tag ghcr.io/juanferrin99/dock:main
         env:
-          MY_DATE: $MY_DATE
-          IDHASH: $IDHASH
+          MY_DATE: ${MY_DATE}
+          IDHASH: ${IDHASH}
           
       - name: push image
         run: docker push ghcr.io/juanferrin99/dock:main
