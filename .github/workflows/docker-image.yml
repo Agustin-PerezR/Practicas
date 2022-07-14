@@ -20,7 +20,7 @@ jobs:
         run:  echo "IDHASH=$(git rev-parse --short HEAD)" >> ${GITHUB_ENV}
  
       - name: login
-        run: docker login -u="juanferrin99" -p=${{secrets.password}}
+        run: docker login ghcr.io -u="juanferrin99" -p=${{secrets.password}}
 
       - name: build image
         run: docker build . --tag ghcr.io/juanferrin99/dock:main
