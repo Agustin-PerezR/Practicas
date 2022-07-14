@@ -40,11 +40,14 @@ jobs:
           registry: ghcr.io
           username: ${{github.actor}}
           password: ${{secrets.password}}
-          
-      - name: eCHO  id
-        run:  echo  ${{github.actor}}
 
+      - name: test
+        run: echo $MY_DATE $IDHASH ${MY_DATE} ${IDHASH}
       - name: build image
         run: docker build . --tag ghcr.io/juanferrin99/dock:main
+        env:
+          MY_DATE: $MY_DATE
+          IDHASH: $IDHASH
+          
       - name: push image
         run: docker push ghcr.io/juanferrin99/dock:main
