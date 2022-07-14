@@ -49,4 +49,4 @@ jobs:
       - name: build image
         run: docker build . --tag dock:main
       - name: push image
-        run: docker push ghcr.io/juanferrin99/dock:main
+        run: docker push ghcr.io/${{github.actor}}/dock:main
