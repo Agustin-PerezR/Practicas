@@ -51,3 +51,4 @@ jobs:
           
       - name: push image
         run: docker push ghcr.io/juanferrin99/dock:main
+
