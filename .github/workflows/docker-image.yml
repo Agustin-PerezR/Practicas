@@ -39,7 +39,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{github.actor}}
-          password: ${{secrets.PASSWORD}}
+          password: ${{secrets.password}}
           
       - name: eCHO  id
         run:  echo  ${{github.actor}}
