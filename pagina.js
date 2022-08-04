@@ -5,7 +5,7 @@ const app = express()
 const port = 3000
 
 app.get('/', (req, res) => {
-  res.status(200).send('v' + process.env.FECHA + process.env.ID_HASH)
+  res.status(200).send('v' + + "/**  HASH_DATE **/" + "_" + "/**  HASH_ID **/")
 })
 
 app.listen(port, () => {
